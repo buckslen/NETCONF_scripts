@@ -43,7 +43,10 @@ def main():
             vlan_list = []
             xml_name = netconf_response.data_xml
             dict_name = xmltodict.parse(xml_name)
-            max_vlans = int(dict_name["data"]["System"]["bd-items"]["allVlans"])
+            if type(dict_name["data"]["System"]["bd-items"]["bd-items"]["BD-list"]) == list:
+                max_vlans = len(dict_name["data"]["System"]["bd-items"]["bd-items"]["BD-list"])
+            else:
+                max_vlans = 1
             print("\nSwitch", dict_name["data"]["System"]["name"], "has", max_vlans, "vlans")
 #            print("Number of vlans", dict_name["data"]["System"]["bd-items"]["allVlans"])
             if max_vlans == 1:
@@ -56,7 +59,6 @@ def main():
 #            print(dict_name["data"])
             vlan_list.sort()
             print("List of vlans:")
-            print(*vlan_list, sep = ", ")
-           
+            print(*vlan_list, sep = ", ") 
 if __name__ == '__main__':
     main()
