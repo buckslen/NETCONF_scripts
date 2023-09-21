@@ -33,15 +33,27 @@ def main():
             version_filter = '''
                             <filter>
                                 <System xmlns="http://cisco.com/ns/yang/cisco-nx-os-device">
-                                    <name/>
+                                  <name/>
+                                  <intf-items>
+                                    <phys-items>
+                                      <PhysIf-list>
+                                        <id>eth1/13</id>
+                                        <layer/>
+                                        <mode/>
+                                        <accessVlan/>
+                                      </PhysIf-list>
+                                    </phys-items>
+                                  </intf-items>
                                 </System>
                             </filter>
                            '''
             netconf_response = m.get(filter=version_filter)
-            print(netconf_response)
+#            print(netconf_response)
             xml_name = netconf_response.data_xml
             dict_name = xmltodict.parse(xml_name)
-            print(dict_name["data"]["System"]["name"])
-
+#            print(dict_name)
+            print("\nSwitch", dict_name["data"]["System"]["name"])
+            print("Interface", dict_name["data"]["System"]["intf-items"]["phys-items"]["PhysIf-list"]["id"], dict_name["data"]["System"]["intf-items"]["phys-items"]["PhysIf-list"]["layer"], dict_name["data"]["System"]["intf-items"]["phys-items"]["PhysIf-list"]["mode"], dict_name["data"]["System"]["intf-items"]["phys-items"]["PhysIf-list"]["accessVlan"])
+           
 if __name__ == '__main__':
-    main()
+       main()

@@ -30,18 +30,23 @@ def main():
                              password=device["password"],
                              hostkey_verify=False) as m:
 
-            version_filter = '''
-                            <filter>
-                                <System xmlns="http://cisco.com/ns/yang/cisco-nx-os-device">
-                                    <name/>
-                                </System>
-                            </filter>
-                           '''
-            netconf_response = m.get(filter=version_filter)
-            print(netconf_response)
-            xml_name = netconf_response.data_xml
-            dict_name = xmltodict.parse(xml_name)
-            print(dict_name["data"]["System"]["name"])
-
+                add_vlan = """
+                           <config>
+                             <System xmlns="http://cisco.com/ns/yang/cisco-nx-os-device">
+                                <intf-items>
+                                  <phys-items>
+                                    <PhysIf-list>
+                                      <id>eth1/13</id>
+                                      <mode>access</mode>
+                                      <layer>Layer2</layer>
+                                      <accessVlan>vlan-100</accessVlan>
+                                    </PhysIf-list>
+                                  </phys-items>
+                                </intf-items>
+                             </System>
+                           </config>
+                           """
+                netconf_response = m.edit_config(target="running", config=add_vlan)
+                print(netconf_response) 
 if __name__ == '__main__':
     main()
