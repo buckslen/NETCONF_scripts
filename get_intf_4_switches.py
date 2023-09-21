@@ -4,22 +4,22 @@ from lxml import etree
 import xmltodict
 
 devices = [
-        {"address" : "10.122.187.138",
+        {"address" : "198.18.129.1",
         "netconf_port" : 830,
         "username" : "admin",
-        "password" : "cisco!123"},
-        {"address" : "10.122.187.139",
+        "password" : "cisco"},
+        {"address" : "198.18.129.2",
         "netconf_port" : 830,
         "username" : "admin",
-        "password" : "cisco!123"},
-        {"address" : "10.122.187.140",
+        "password" : "cisco"},
+        {"address" : "198.18.129.3",
         "netconf_port" : 830,
         "username" : "admin",
-        "password" : "cisco!123"},
-        {"address" : "10.122.187.141",
+        "password" : "cisco"},
+        {"address" : "198.18.129.4",
         "netconf_port" : 830,
         "username" : "admin",
-        "password" : "cisco!123"}]
+        "password" : "cisco"}]
 
 def main():
 
