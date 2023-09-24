@@ -41,7 +41,7 @@ def main():
             print(netconf_response)
             xml_name = netconf_response.data_xml
             dict_name = xmltodict.parse(xml_name)
-            print(dict_name["data"]["System"]["name"])
+            print("/nHostname: ", dict_name["data"]["System"]["name"], "/n")
 
 if __name__ == '__main__':
     main()
